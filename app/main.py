@@ -1,15 +1,12 @@
 from fastapi import FastAPI
 
+from app.api.routers import health
+
+from app.core.config import settings
+
 app = FastAPI(
-    title="VeteFlow API",
-    description="Api para sistema de gestion de veterinarias",
-    version="1.0.0",
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION
 )
 
-@app.get("/")
-def root():
-    return {"message": "Bienvenidos a  VeteFlow API!"}
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+app.include_router(health.router,prefix="/api")
