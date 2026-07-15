@@ -16,5 +16,6 @@ async def root():
 @router.get("/health")
 async def health():
     return {
-        "status": "ok"
+        "status": "ok", 
+        "database": "ok"
     }

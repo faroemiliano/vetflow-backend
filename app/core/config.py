@@ -10,9 +10,11 @@ class Settings(BaseSettings):
     APP_NAME: str
     APP_VERSION: str
     ENVIRONMENT: str
+    DATABASE_URL: str
 
     model_config = SettingsConfigDict(
-        env_file=BASE_DIR / ".env"
+        env_file=str(BASE_DIR / ".env"),
+        env_file_encoding="utf-8"
     )
 
 
