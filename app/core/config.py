@@ -1,3 +1,5 @@
+# Leer las variables de entorno desde un archivo .env y configurarlas en la aplicación.
+
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict

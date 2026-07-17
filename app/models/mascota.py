@@ -3,6 +3,12 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models.cliente import Cliente
+    from app.models.turno import Turno
+    from app.models.veterinaria import Veterinaria
 
 class Mascota(Base):
     __tablename__ = "mascotas"
@@ -36,11 +42,21 @@ class Mascota(Base):
         nullable=False
     )
 
+    veterinaria_id: Mapped[int] = mapped_column(
+        ForeignKey("veterinarias.id"),
+        nullable=False
+    )
 
     cliente: Mapped["Cliente"] = relationship(
         back_populates="mascotas"
     )
 
+    veterinaria: Mapped["Veterinaria"] = relationship(
+        back_populates="mascotas"
+    )
+
     turnos: Mapped[list["Turno"]] = relationship(
-    back_populates="mascota"
-)
+        back_populates="mascota"
+    )
+
+    

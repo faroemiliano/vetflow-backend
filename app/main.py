@@ -1,9 +1,7 @@
 from fastapi import FastAPI
 
 from app.core.config import settings
-from app.api.routers import health
-
-
+from app.api.routers import clientesRouter, health, mascotasRouter
 
 
 app = FastAPI(
@@ -14,5 +12,16 @@ app = FastAPI(
 
 app.include_router(
     health.router,
+    prefix="/api"
+)
+
+
+app.include_router(
+    clientesRouter.router,
+    prefix="/api"
+)
+
+app.include_router(
+    mascotasRouter.router,
     prefix="/api"
 )

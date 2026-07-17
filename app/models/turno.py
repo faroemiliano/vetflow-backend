@@ -14,6 +14,11 @@ class Turno(Base):
         index=True
     )
 
+    usuario_id: Mapped[int] = mapped_column(
+        ForeignKey("usuarios.id"),
+        nullable=False
+    )
+
     fecha_hora: Mapped[datetime] = mapped_column(
         DateTime,
         nullable=False
@@ -35,7 +40,20 @@ class Turno(Base):
         nullable=False
     )
 
+    veterinaria_id: Mapped[int] = mapped_column(
+        ForeignKey("veterinarias.id"),
+        nullable=False
+    )
 
     mascota: Mapped["Mascota"] = relationship(
         back_populates="turnos"
     )
+
+    veterinaria: Mapped["Veterinaria"] = relationship(
+        back_populates="turnos"
+    )
+
+    usuario: Mapped["Usuario"] = relationship(
+        back_populates="turnos"
+    )
+    

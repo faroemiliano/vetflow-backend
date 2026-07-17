@@ -35,3 +35,11 @@ class Veterinaria(Base):
     clientes: Mapped[list["Cliente"]] = relationship(
     back_populates="veterinaria"
 )
+    
+    mascotas: Mapped[list["Mascota"]] = relationship(
+    back_populates="veterinaria"
+)
+    
+    turnos: Mapped[list["Turno"]] = relationship(
+    back_populates="veterinaria"
+)

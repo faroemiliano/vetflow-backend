@@ -24,3 +24,6 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+
+# aqui cada request que se haga a la base de datos, se creara una nueva sesion de base de datos y se cerrara al finalizar la peticion. Esto es importante para evitar problemas de concurrencia y mantener la integridad de los datos.
