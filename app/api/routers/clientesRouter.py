@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
+from app.api.dependencies.auth import get_current_user, require_roles
 from app.database.session import get_db
 
-from app.schemas.cliente import (
+from app.models.usuario import RolUsuario, Usuario
+from app.schemas.cliente_schemas import (
     ClienteCreate,
     ClienteUpdate,
     ClienteResponse,
@@ -22,7 +24,7 @@ router = APIRouter(
     tags=["Clientes"],
 )
 
-VETERINARIA_ID = 2  # ID de la veterinaria para la que se están gestionando los clientes    
+  # ID de la veterinaria para la que se están gestionando los clientes    
 
 @router.post(
     "/",
@@ -32,12 +34,18 @@ VETERINARIA_ID = 2  # ID de la veterinaria para la que se están gestionando los
 def crear_cliente(
     cliente: ClienteCreate,
     db: Session = Depends(get_db),
+    current_user: Usuario = Depends(
+    require_roles(
+        RolUsuario.ADMIN,
+        RolUsuario.RECEPCIONISTA,
+    )
+),
 ):
     try:
         return create_cliente_service(
             db,
             cliente,
-            VETERINARIA_ID,
+            current_user.veterinaria_id,
         )
 
     except ValueError as e:
@@ -52,10 +60,11 @@ def crear_cliente(
 )
 def listar_clientes(
     db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user),
 ):
     return get_clientes_service(
         db,
-        VETERINARIA_ID,
+        current_user.veterinaria_id,
     )
 
 @router.get(
@@ -65,12 +74,13 @@ def listar_clientes(
 def obtener_cliente(
     cliente_id: int,
     db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user),
 ):
     try:
         return get_cliente_service(
             db,
             cliente_id,
-            VETERINARIA_ID,
+            current_user.veterinaria_id,
         )
 
     except ValueError as e:
@@ -87,13 +97,19 @@ def actualizar_cliente(
     cliente_id: int,
     cliente: ClienteUpdate,
     db: Session = Depends(get_db),
+    current_user: Usuario = Depends(
+    require_roles(
+        RolUsuario.ADMIN,
+        RolUsuario.RECEPCIONISTA,
+    )
+),
 ):
     try:
         return update_cliente_service(
             db,
             cliente_id,
             cliente,
-            VETERINARIA_ID,
+            current_user.veterinaria_id,
         )
 
     except ValueError as e:
@@ -109,13 +125,16 @@ def actualizar_cliente(
 def eliminar_cliente(
     cliente_id: int,
     db: Session = Depends(get_db),
+    current_user: Usuario = Depends(
+    require_roles(RolUsuario.ADMIN)
+),
 ):
 
     try:
         delete_cliente_service(
             db,
             cliente_id,
-            VETERINARIA_ID,
+            current_user.veterinaria_id,
         )
 
     except ValueError as e:

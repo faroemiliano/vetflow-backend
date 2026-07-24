@@ -1,9 +1,11 @@
-from datetime import datetime
-
-from sqlalchemy import String, ForeignKey, DateTime
+from datetime import datetime, timezone
+from enum import Enum
+from sqlalchemy import Index, String, ForeignKey, DateTime, func,Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
+from app.models.enums import EstadoTurno
+
 
 
 class Turno(Base):
@@ -20,7 +22,7 @@ class Turno(Base):
     )
 
     fecha_hora: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
 
@@ -29,10 +31,10 @@ class Turno(Base):
         nullable=True
     )
 
-    estado: Mapped[str] = mapped_column(
-        String(50),
-        default="pendiente",
-        nullable=False
+    estado: Mapped[EstadoTurno] = mapped_column(
+        SQLEnum(EstadoTurno),
+        default=EstadoTurno.PENDIENTE,
+        nullable=False,
     )
 
     mascota_id: Mapped[int] = mapped_column(
@@ -44,6 +46,28 @@ class Turno(Base):
         ForeignKey("veterinarias.id"),
         nullable=False
     )
+
+    
+
+    observaciones: Mapped[str | None] = mapped_column(
+        String(1000),
+        nullable=True
+    )
+
+    creado_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False,
+    )
+
+    actualizado_en: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False,
+    )
+
+
 
     mascota: Mapped["Mascota"] = relationship(
         back_populates="turnos"
@@ -57,3 +81,10 @@ class Turno(Base):
         back_populates="turnos"
     )
     
+    __table_args__ = (
+        Index(
+            "ix_turnos_veterinaria_fecha",
+            "veterinaria_id",
+            "fecha_hora",
+        ),
+    )

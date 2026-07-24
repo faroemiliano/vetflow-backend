@@ -3,7 +3,7 @@
 from sqlalchemy.orm import Session
 # coneccion actual con el modelo cliente (postgreSQL)
 from app.models.cliente import Cliente
-from app.schemas.cliente import ClienteCreate, ClienteUpdate
+from app.schemas.cliente_schemas import ClienteCreate, ClienteUpdate
 
 def create_cliente(
         db: Session,

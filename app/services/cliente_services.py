@@ -9,7 +9,7 @@ from app.repositories.cliente_repository import (
     get_clientes,
     update_cliente,
 )
-from app.schemas.cliente import ClienteCreate, ClienteUpdate
+from app.schemas.cliente_schemas import ClienteCreate, ClienteUpdate
 
 
 def create_cliente_service(

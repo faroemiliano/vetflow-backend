@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.core.config import settings
-from app.api.routers import clientesRouter, health, mascotasRouter
+from app.api.routers import clientesRouter, health, mascotasRouter, usuariosRouter, turnosRouter, historiaClinicaRouter, vacunaRouter
 
 
 app = FastAPI(
@@ -23,5 +23,25 @@ app.include_router(
 
 app.include_router(
     mascotasRouter.router,
+    prefix="/api"
+)
+
+app.include_router(
+    usuariosRouter.router,
+    prefix="/api"
+)
+
+app.include_router(
+    turnosRouter.router,
+    prefix="/api"
+)
+
+app.include_router(
+    historiaClinicaRouter.router,
+    prefix="/api",
+)
+
+app.include_router(
+    vacunaRouter.router,
     prefix="/api"
 )

@@ -28,6 +28,13 @@ class Veterinaria(Base):
         nullable=True
     )
 
+    slug: Mapped[str] = mapped_column(
+        String(100),
+        unique=True,
+        index=True,
+        nullable=False,
+    )
+
     usuarios: Mapped[list["Usuario"]] = relationship(
     back_populates="veterinaria"
 )
@@ -41,5 +48,13 @@ class Veterinaria(Base):
 )
     
     turnos: Mapped[list["Turno"]] = relationship(
+    back_populates="veterinaria"
+)
+    
+    vacunas: Mapped[list["Vacuna"]] = relationship(
+    back_populates="veterinaria"
+)
+
+    aplicaciones_vacunas: Mapped[list["AplicacionVacuna"]] = relationship(
     back_populates="veterinaria"
 )

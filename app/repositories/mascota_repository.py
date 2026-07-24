@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.models.mascota import Mascota
-from app.schemas.mascota import MascotaCreate, MascotaUpdate
+from app.schemas.mascota_schemas import MascotaCreate, MascotaUpdate
 
 def create_mascota(
         db: Session,
@@ -65,7 +65,7 @@ def get_mascotas(
     Returns:
         List[Mascota]: La lista de mascotas encontradas.
     """
-    return db.query(Mascota).filter(Mascota.veterinaria_id == veterinaria_id).all()
+    return db.query(Mascota).filter(Mascota.veterinaria_id == veterinaria_id).order_by(Mascota.nombre).all()
 
 def update_mascota(
         db: Session,

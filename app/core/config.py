@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     APP_VERSION: str
     ENVIRONMENT: str
     DATABASE_URL: str
+    GOOGLE_CLIENT_ID: str | None = None
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
     model_config = SettingsConfigDict(
         env_file=str(BASE_DIR / ".env"),

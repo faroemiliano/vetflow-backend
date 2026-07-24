@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.models.mascota import Mascota
-from app.schemas.mascota import MascotaCreate, MascotaUpdate
+from app.schemas.mascota_schemas import MascotaCreate, MascotaUpdate
 
 from app.repositories.mascota_repository import (
     create_mascota,
@@ -43,7 +43,7 @@ def get_mascota_service(
     if mascota is None:
         raise ValueError("Mascota no fue encontrada.")
     
-    return get_mascota(db, mascota_id, veterinaria_id)
+    return mascota
 
 def get_mascotas_service(
     db: Session,
