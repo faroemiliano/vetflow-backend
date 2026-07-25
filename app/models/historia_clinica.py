@@ -67,3 +67,12 @@ class HistoriaClinica(Base):
     usuario: Mapped["Usuario"] = relationship(
         back_populates="historias_clinicas"
     )
+
+    recetas: Mapped[list["Receta"]] = relationship(
+        back_populates="historia_clinica"
+    )
+
+    estudios: Mapped[list["Estudio"]] = relationship(
+        back_populates="historia_clinica",
+        cascade="all, delete-orphan",
+    )

@@ -25,3 +25,14 @@ class EspecieAnimal(str, Enum):
     PORCINO = "PORCINO"
     EXOTICO = "EXOTICO"
     OTRO = "OTRO"
+
+
+class ViaAdministracion(str, Enum):
+    ORAL = "ORAL"
+    INYECTABLE = "INYECTABLE"
+    TOPICA = "TOPICA"
+    OFTALMICA = "OFTALMICA"
+    OTICA = "OTICA"
+    NASAL = "NASAL"
+    RECTAL = "RECTAL"
+    OTRA = "OTRA"

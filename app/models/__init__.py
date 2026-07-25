@@ -6,3 +6,6 @@ from app.models.turno import Turno
 from app.models.historia_clinica import HistoriaClinica
 from app.models.vacuna import Vacuna
 from app.models.aplicacion_vacuna import AplicacionVacuna
+from app.models.recetas import Receta
+from app.models.receta_medicamento import RecetaMedicamento
+from app.models.estudio_medico import Estudio

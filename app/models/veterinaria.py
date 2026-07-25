@@ -58,3 +58,11 @@ class Veterinaria(Base):
     aplicaciones_vacunas: Mapped[list["AplicacionVacuna"]] = relationship(
     back_populates="veterinaria"
 )
+    
+    recetas: Mapped[list["Receta"]] = relationship(
+        back_populates="veterinaria"
+    )
+
+    estudios: Mapped[list["Estudio"]] = relationship(
+        back_populates="veterinaria",
+    )

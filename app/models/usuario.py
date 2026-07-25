@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from app.models.veterinaria import Veterinaria
     from app.models.turno import Turno
     from app.models.historia_clinica import HistoriaClinica
-
+    from app.models.recetas import Receta
 
 
 
@@ -112,4 +112,12 @@ class Usuario(Base):
 
     historias_clinicas: Mapped[list["HistoriaClinica"]] = relationship(
         back_populates="usuario"
+    )
+
+    recetas: Mapped[list["Receta"]] = relationship(
+        back_populates="usuario"
+    )
+
+    estudios: Mapped[list["Estudio"]] = relationship(
+        back_populates="usuario",
     )
