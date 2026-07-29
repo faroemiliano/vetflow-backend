@@ -121,3 +121,7 @@ class Usuario(Base):
     estudios: Mapped[list["Estudio"]] = relationship(
         back_populates="usuario",
     )
+
+    adjuntos: Mapped[list["Adjunto"]] = relationship(
+        back_populates="usuario",
+    )

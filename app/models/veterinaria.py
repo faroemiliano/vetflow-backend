@@ -66,3 +66,7 @@ class Veterinaria(Base):
     estudios: Mapped[list["Estudio"]] = relationship(
         back_populates="veterinaria",
     )
+
+    adjuntos: Mapped[list["Adjunto"]] = relationship(
+        back_populates="veterinaria",
+    )

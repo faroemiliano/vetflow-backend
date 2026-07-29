@@ -9,3 +9,4 @@ from app.models.aplicacion_vacuna import AplicacionVacuna
 from app.models.recetas import Receta
 from app.models.receta_medicamento import RecetaMedicamento
 from app.models.estudio_medico import Estudio
+from app.models.adjunto import Adjunto

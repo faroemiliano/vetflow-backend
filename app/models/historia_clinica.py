@@ -76,3 +76,8 @@ class HistoriaClinica(Base):
         back_populates="historia_clinica",
         cascade="all, delete-orphan",
     )
+
+    adjuntos: Mapped[list["Adjunto"]] = relationship(
+        back_populates="historia_clinica",
+    cascade="all, delete-orphan",
+    )
