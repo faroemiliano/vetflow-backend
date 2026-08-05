@@ -1,8 +1,24 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
 
+if TYPE_CHECKING:
+    from app.models.usuario import Usuario
+    from app.models.cliente import Cliente
+    from app.models.mascota import Mascota
+    from app.models.turno import Turno
+    from app.models.vacuna import Vacuna
+    from app.models.aplicacion_vacuna import AplicacionVacuna
+    from app.models.receta_medicamento import Receta
+    from app.models.estudio_medico import Estudio
+    from app.models.adjunto import Adjunto
+    from app.models.factura import Factura
+    from app.models.pago import Pago
+    from app.models.caja import Caja
+    from app.models.movimiento_caja import MovimientoCaja
 
 class Veterinaria(Base):
     __tablename__ = "veterinarias"
@@ -68,5 +84,25 @@ class Veterinaria(Base):
     )
 
     adjuntos: Mapped[list["Adjunto"]] = relationship(
+        back_populates="veterinaria",
+    )
+
+    facturas: Mapped[list["Factura"]] = relationship(
+        back_populates="veterinaria",
+    )
+
+    pagos: Mapped[list["Pago"]] = relationship(
+        back_populates="veterinaria",
+    )
+
+    cajas: Mapped[list["Caja"]] = relationship(
+        back_populates="veterinaria",
+    )
+
+    movimientos_caja: Mapped[list["MovimientoCaja"]] = relationship(
+        back_populates="veterinaria",
+    )
+
+    gastos: Mapped[list["Gasto"]] = relationship(
         back_populates="veterinaria",
     )

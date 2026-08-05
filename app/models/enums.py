@@ -36,3 +36,35 @@ class ViaAdministracion(str, Enum):
     NASAL = "NASAL"
     RECTAL = "RECTAL"
     OTRA = "OTRA"
+
+class EstadoFactura(str, Enum):
+    PENDIENTE = "PENDIENTE"
+    PARCIAL = "PARCIAL"
+    PAGADA = "PAGADA"
+    ANULADA = "ANULADA"
+
+class MetodoPago(str, Enum):
+    EFECTIVO = "EFECTIVO"
+    TARJETA = "TARJETA"
+    TRANSFERENCIA = "TRANSFERENCIA"
+    MERCADO_PAGO = "MERCADO_PAGO"
+    OTRO = "OTRO"
+
+class EstadoPago(str, Enum):
+    ACTIVO = "ACTIVO"
+    ANULADO = "ANULADO"
+
+class EstadoCaja(Enum):
+    ABIERTA = "ABIERTA"
+    CERRADA = "CERRADA"
+
+
+class TipoMovimientoCaja(Enum):
+    INGRESO = "INGRESO"
+    EGRESO = "EGRESO"
+
+
+class OrigenMovimientoCaja(Enum):
+    PAGO = "PAGO"
+    GASTO = "GASTO"
+    AJUSTE = "AJUSTE"

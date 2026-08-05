@@ -10,3 +10,9 @@ from app.models.recetas import Receta
 from app.models.receta_medicamento import RecetaMedicamento
 from app.models.estudio_medico import Estudio
 from app.models.adjunto import Adjunto
+from app.models.factura import Factura
+from app.models.factura_detalle import FacturaDetalle
+from app.models.pago import Pago
+from app.models.caja import Caja
+from app.models.movimiento_caja import MovimientoCaja
+from app.models.gasto import Gasto

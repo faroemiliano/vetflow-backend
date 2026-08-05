@@ -17,7 +17,10 @@ if TYPE_CHECKING:
     from app.models.turno import Turno
     from app.models.historia_clinica import HistoriaClinica
     from app.models.recetas import Receta
-
+    from app.models.factura import Factura
+    from app.models.pago import Pago
+    from app.models.caja import Caja
+    from app.models.movimiento_caja import MovimientoCaja
 
 
 class Usuario(Base):
@@ -123,5 +126,29 @@ class Usuario(Base):
     )
 
     adjuntos: Mapped[list["Adjunto"]] = relationship(
+        back_populates="usuario",
+    )
+
+    facturas: Mapped[list["Factura"]] = relationship(
+        back_populates="usuario"
+    )
+
+    pagos: Mapped[list["Pago"]] = relationship(
+        back_populates="usuario",
+    )
+
+    movimientos_caja: Mapped[list["MovimientoCaja"]] = relationship(
+        back_populates="usuario",
+    )
+
+    cajas_abiertas: Mapped[list["Caja"]] = relationship(
+        foreign_keys="Caja.usuario_apertura_id",
+    )
+
+    cajas_cerradas: Mapped[list["Caja"]] = relationship(
+        foreign_keys="Caja.usuario_cierre_id",
+    )   
+
+    gastos: Mapped[list["Gasto"]] = relationship(
         back_populates="usuario",
     )

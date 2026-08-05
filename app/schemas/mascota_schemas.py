@@ -47,6 +47,8 @@ class MascotaUpdate(BaseModel):
 
     edad: int | None = None
 
+    cliente_id: int | None = None
+
 
 class MascotaResponse(BaseModel):
     id: int
